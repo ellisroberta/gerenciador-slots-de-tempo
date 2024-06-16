@@ -6,6 +6,10 @@ import java.util.List;
 
 public class SlotGenerator {
 
+    private SlotGenerator() {
+        throw new UnsupportedOperationException("Esta é uma classe utilitária e não pode ser instanciada");
+    }
+
     public static List<LocalTime> generateSlots(LocalTime startTime, LocalTime endTime) {
         List<LocalTime> slots = new ArrayList<>();
         LocalTime time = startTime;
