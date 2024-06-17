@@ -30,7 +30,7 @@ mvn clean package
 ```
 
 ### 2. Construir Imagem Docker:
-Antes de iniciar o ambiente com docker-compose, construa a imagem Docker do  Gerenciador de Slots de Tempo:
+Antes de iniciar o ambiente com docker-compose, construa a imagem Docker do Gerenciador de Slots de Tempo:
 
 ```bash
 docker build -t gerenciador-slot-de-tempo .
@@ -46,7 +46,7 @@ docker-compose up -d
 Isso garantirá que todos os serviços necessários sejam iniciados corretamente.
 
 ## Documentação do Swagger
-O erenciador de Slots de Tempo possui uma documentação do Swagger que descreve os endpoints disponíveis e fornece informações detalhadas sobre como consumir a API.
+O Gerenciador de Slots de Tempo possui uma documentação do Swagger que descreve os endpoints disponíveis e fornece informações detalhadas sobre como consumir a API.
 
 Para acessar a documentação do Swagger, siga as etapas abaixo:
 
