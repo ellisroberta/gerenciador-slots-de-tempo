@@ -33,7 +33,7 @@ mvn clean package
 Antes de iniciar o ambiente com docker-compose, construa a imagem Docker do Gerenciador de Slots de Tempo:
 
 ```bash
-docker build -t gerenciador-slot-de-tempo .
+docker build -t gerenciador-slots-de-tempo .
 ```
 
 ### 3. Executar com Docker Compose:
