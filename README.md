@@ -26,7 +26,6 @@ Certifique-se de que o Java 17 e o Maven estejam configurados corretamente em se
 Navegue até a raiz do projeto e execute o seguinte comando para compilar o projeto utilizando Maven:
 
 ```bash
-Copiar código
 mvn clean package
 ```
 
@@ -34,7 +33,6 @@ mvn clean package
 Antes de iniciar o ambiente com docker-compose, construa a imagem Docker do  Gerenciador de Slots de Tempo:
 
 ```bash
-Copiar código
 docker build -t gerenciador-slot-de-tempo .
 ```
 
@@ -42,7 +40,6 @@ docker build -t gerenciador-slot-de-tempo .
 Inicie o ambiente utilizando docker-compose, garantindo que o comando seja executado no diretório principal do projeto:
 
 ```bash
-Copiar código
 docker-compose up -d
 ```
 
@@ -72,34 +69,29 @@ Aqui estão alguns exemplos de como usar as funcionalidades do Gerenciador de Sl
 - Registrar a disponibilidade de um profissional:
 
 ```bash
-Copiar código
 curl -X POST "http://localhost:8080/availabilities" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"professionalId\": 1, \"dayOfWeek\": \"MONDAY\", \"startTime\": \"08:00:00\", \"endTime\": \"10:00:00\"}"
 ```
 
 - Consultar informações de disponibilidade (use o ID obtido na criação):
 
 ```bash
-Copiar código
 curl -X GET "http://localhost:8080/availabilities/{availabilityId}" -H "accept: */*"
 ```
 
 - Atualizar informações de disponibilidade:
 
 ```bash
-Copiar código
 curl -X PUT "http://localhost:8080/availabilities/{availabilityId}" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"professionalId\": 1, \"dayOfWeek\": \"TUESDAY\", \"startTime\": \"09:00:00\", \"endTime\": \"11:00:00\"}"
 ```
 
 - Reservar um horário para um cliente:
 
 ```bash
-Copiar código
 curl -X POST "http://localhost:8080/reservations" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"professionalId\": 1, \"startTime\": \"2023-06-14T08:30:00\", \"endTime\": \"2023-06-14T09:30:00\"}"
 ```
 
 - Deletar um horário de disponibilidade:
 
 ```bash
-Copiar código
 curl -X DELETE "http://localhost:8080/availabilities/{availabilityId}" -H "accept: */*"
 ```
