@@ -16,18 +16,22 @@ import java.util.UUID;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "")
+@Table(name = "availability")
 public class Availability implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
+    @Column(name = "professional_id", nullable = false)
     private UUID professionalId;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "day_of_week", nullable = false)
     private DayOfWeek dayOfWeek;
 
+    @Column(name = "start_time", nullable = false)
     private LocalTime startTime;
+    @Column(name = "end_time", nullable = false)
     private LocalTime endTime;
 }

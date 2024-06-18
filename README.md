@@ -45,6 +45,12 @@ docker-compose up -d
 
 Isso garantirá que todos os serviços necessários sejam iniciados corretamente.
 
+### 4. Executar a aplicação:
+
+```bash
+mvn spring-boot:run
+```
+
 ## Documentação do Swagger
 O Gerenciador de Slots de Tempo possui uma documentação do Swagger que descreve os endpoints disponíveis e fornece informações detalhadas sobre como consumir a API.
 
