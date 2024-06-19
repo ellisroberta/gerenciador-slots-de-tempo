@@ -75,29 +75,29 @@ Aqui estão alguns exemplos de como usar as funcionalidades do Gerenciador de Sl
 - Registrar a disponibilidade de um profissional:
 
 ```bash
-curl -X POST "http://localhost:8080/availabilities" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"professionalId\": 1, \"dayOfWeek\": \"MONDAY\", \"startTime\": \"08:00:00\", \"endTime\": \"10:00:00\"}"
+curl -X POST "http://localhost:8080/api/availabilities" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"professionalId\": 1, \"dayOfWeek\": \"MONDAY\", \"startTime\": \"08:00:00\", \"endTime\": \"10:00:00\"}"
 ```
 
-- Consultar informações de disponibilidade (use o ID obtido na criação):
+- Consultar informações de disponibilidade (substitua {availabilityId} pelo ID obtido na criação):
 
 ```bash
-curl -X GET "http://localhost:8080/availabilities/{availabilityId}" -H "accept: */*"
+curl -X GET "http://localhost:8080/api/availabilities/{availabilityId}" -H "accept: */*"
 ```
 
 - Atualizar informações de disponibilidade:
 
 ```bash
-curl -X PUT "http://localhost:8080/availabilities/{availabilityId}" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"professionalId\": 1, \"dayOfWeek\": \"TUESDAY\", \"startTime\": \"09:00:00\", \"endTime\": \"11:00:00\"}"
+curl -X PUT "http://localhost:8080/api/availabilities/{availabilityId}" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"professionalId\": 1, \"dayOfWeek\": \"TUESDAY\", \"startTime\": \"09:00:00\", \"endTime\": \"11:00:00\"}"
 ```
 
 - Reservar um horário para um cliente:
 
 ```bash
-curl -X POST "http://localhost:8080/reservations" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"professionalId\": 1, \"startTime\": \"2023-06-14T08:30:00\", \"endTime\": \"2023-06-14T09:30:00\"}"
+curl -X POST "http://localhost:8080/api/reservations" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"professionalId\": 1, \"startTime\": \"2023-06-14T08:30:00\", \"endTime\": \"2023-06-14T09:30:00\"}"
 ```
 
 - Deletar um horário de disponibilidade:
 
 ```bash
-curl -X DELETE "http://localhost:8080/availabilities/{availabilityId}" -H "accept: */*"
+curl -X DELETE "http://localhost:8080/api/availabilities/{availabilityId}" -H "accept: */*"
 ```
