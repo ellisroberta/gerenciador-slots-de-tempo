@@ -23,33 +23,39 @@ Certifique-se de que o Java 17 e o Maven estejam configurados corretamente em se
 ## Compilação e Execução
 
 ### 1. Compilar o Projeto:
-Navegue até a raiz do projeto e execute o seguinte comando para compilar o projeto utilizando Maven:
+Para compilar o projeto utilizando Maven, navegue até a raiz do projeto e execute:
 
 ```bash
 mvn clean package
 ```
+Este comando irá compilar o código fonte, executar os testes e gerar o arquivo JAR executável na pasta target.
 
-### 2. Construir Imagem Docker:
-Antes de iniciar o ambiente com docker-compose, construa a imagem Docker do Gerenciador de Slots de Tempo:
+### 2. Executar Localmente com Maven:
+Para iniciar a aplicação localmente utilizando Maven:
+
+```bash
+mvn spring-boot:run
+```
+
+### 3. Construir e Executar com Docker:
+
+#### 3.1 Construir Imagem Docker
+Antes de iniciar o ambiente com docker-compose, construa a imagem Docker do Gerenciador de Slots de Tempo. Certifique-se de estar no diretório principal do projeto onde está localizado o Dockerfile:
 
 ```bash
 docker build -t gerenciador-slots-de-tempo .
 ```
 
-### 3. Executar com Docker Compose:
-Inicie o ambiente utilizando docker-compose, garantindo que o comando seja executado no diretório principal do projeto:
+#### 3.2 Executar com Docker Compose
+Utilize docker-compose para iniciar o ambiente completo:
 
 ```bash
 docker-compose up -d
 ```
+Este comando iniciará todos os serviços necessários definidos no arquivo docker-compose.yml em segundo plano (-d).
 
-Isso garantirá que todos os serviços necessários sejam iniciados corretamente.
-
-### 4. Executar a aplicação:
-
-```bash
-mvn spring-boot:run
-```
+### Acessar a Aplicação
+Após iniciar a aplicação, você pode acessar os endpoints e a documentação Swagger. Certifique-se de que todos os serviços estão funcionando corretamente antes de prosseguir.
 
 ## Documentação do Swagger
 O Gerenciador de Slots de Tempo possui uma documentação do Swagger que descreve os endpoints disponíveis e fornece informações detalhadas sobre como consumir a API.
@@ -66,8 +72,9 @@ Certifique-se de que o serviço esteja em execução para acessar a documentaç�
 - Listar todos os horários de disponibilidade dos profissionais.
 - Obter informações detalhadas de disponibilidade com base no ID.
 - Registrar a disponibilidade de um profissional.
-- Reservar um horário para um cliente.
 - Remover um horário de disponibilidade com base no ID.
+- Reservar um horário para um cliente.
+- Obter todas as reservas.
 
 ## Exemplos de Uso (Curl)
 Aqui estão alguns exemplos de como usar as funcionalidades do Gerenciador de Slots de Tempo com curl:
@@ -84,20 +91,26 @@ curl -X POST "http://localhost:8080/api/availabilities" -H "accept: */*" -H "Con
 curl -X GET "http://localhost:8080/api/availabilities/{availabilityId}" -H "accept: */*"
 ```
 
-- Atualizar informações de disponibilidade:
+- Atualizar informações de disponibilidade (substitua {availabilityId} pelo ID obtido na criação):
 
 ```bash
 curl -X PUT "http://localhost:8080/api/availabilities/{availabilityId}" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"professionalId\": 1, \"dayOfWeek\": \"TUESDAY\", \"startTime\": \"09:00:00\", \"endTime\": \"11:00:00\"}"
 ```
 
-- Reservar um horário para um cliente:
+- Deletar um horário de disponibilidade (substitua {availabilityId} pelo ID obtido na criação):
+
+```bash
+curl -X DELETE "http://localhost:8080/api/availabilities/{availabilityId}" -H "accept: */*"
+```
+
+- Reservar um horário para um cliente 
 
 ```bash
 curl -X POST "http://localhost:8080/api/reservations" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"professionalId\": 1, \"startTime\": \"2023-06-14T08:30:00\", \"endTime\": \"2023-06-14T09:30:00\"}"
 ```
 
-- Deletar um horário de disponibilidade:
+- Obter todas as reservas:
 
 ```bash
-curl -X DELETE "http://localhost:8080/api/availabilities/{availabilityId}" -H "accept: */*"
+curl -X GET "http://localhost:8080/api/reservations" -H "accept: */*"
 ```
