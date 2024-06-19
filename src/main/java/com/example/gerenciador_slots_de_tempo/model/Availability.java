@@ -1,6 +1,6 @@
 package com.example.gerenciador_slots_de_tempo.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
