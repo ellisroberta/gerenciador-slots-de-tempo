@@ -7,6 +7,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.example.gerenciador_slots_de_tempo"})
+@EnableSwagger2
 public class GerenciadorSlotsDeTempoApplication {
 
 	public static void main(String[] args) {

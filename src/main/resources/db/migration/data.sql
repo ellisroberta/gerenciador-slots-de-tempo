@@ -10,5 +10,5 @@ VALUES
 -- Insert some sample data into reservation table
 INSERT INTO reservation (id, professional_id, start_time, end_time)
 VALUES
-    (RANDOM_UUID(), RANDOM_UUID(), '2024-06-20 10:00:00', '2024-06-20 11:00:00'),
-    (RANDOM_UUID(), RANDOM_UUID(), '2024-06-21 14:30:00', '2024-06-21 15:30:00');
+    (RANDOM_UUID(), RANDOM_UUID(), '10:00:00', '11:00:00'),
+    (RANDOM_UUID(), RANDOM_UUID(), '14:30:00', '15:30:00');

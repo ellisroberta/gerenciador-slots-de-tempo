@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS availability (
 CREATE TABLE IF NOT EXISTS reservation (
     id UUID PRIMARY KEY,
     professional_id UUID NOT NULL,
-    start_time TIMESTAMP NOT NULL,
-    end_time TIMESTAMP NOT NULL
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL
 );
 

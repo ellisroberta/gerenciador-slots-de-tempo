@@ -30,29 +30,29 @@ mvn clean package
 ```
 Este comando irá compilar o código fonte, executar os testes e gerar o arquivo JAR executável na pasta target.
 
-### 2. Executar Localmente com Maven:
-Para iniciar a aplicação localmente utilizando Maven:
+### 2. Construir e Executar com Docker:
 
-```bash
-mvn spring-boot:run
-```
-
-### 3. Construir e Executar com Docker:
-
-#### 3.1 Construir Imagem Docker
+#### 2.1 Construir Imagem Docker
 Antes de iniciar o ambiente com docker-compose, construa a imagem Docker do Gerenciador de Slots de Tempo. Certifique-se de estar no diretório principal do projeto onde está localizado o Dockerfile:
 
 ```bash
 docker build -t gerenciador-slots-de-tempo .
 ```
 
-#### 3.2 Executar com Docker Compose
+#### 2.2 Executar com Docker Compose
 Utilize docker-compose para iniciar o ambiente completo:
 
 ```bash
 docker-compose up -d
 ```
 Este comando iniciará todos os serviços necessários definidos no arquivo docker-compose.yml em segundo plano (-d).
+
+### 3. Executar Localmente com Maven:
+Para iniciar a aplicação localmente utilizando Maven:
+
+```bash
+mvn spring-boot:run
+```
 
 ### Acessar a Aplicação
 Após iniciar a aplicação, você pode acessar os endpoints e a documentação Swagger. Certifique-se de que todos os serviços estão funcionando corretamente antes de prosseguir.
@@ -83,7 +83,7 @@ Aqui estão alguns exemplos de como usar as funcionalidades do Gerenciador de Sl
 - Registrar a disponibilidade de um profissional:
 
 ```bash
-curl -X POST "http://localhost:8080/api/availabilities" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"professionalId\": 1, \"dayOfWeek\": \"MONDAY\", \"startTime\": \"08:00:00\", \"endTime\": \"10:00:00\"}"
+curl -X POST "http://localhost:8080/api/availabilities" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"professionalId\": "827c10f9-412f-4203-8d1b-49a7187cc7b9", \"dayOfWeek\": \"MONDAY\", \"startTime\": \"08:00:00\", \"endTime\": \"10:00:00\"}"
 ```
 
 - Consultar informações de disponibilidade (substitua {availabilityId} pelo ID obtido na criação):

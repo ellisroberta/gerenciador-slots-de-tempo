@@ -6,6 +6,7 @@ import br.com.six2six.fixturefactory.loader.TemplateLoader;
 import com.example.gerenciador_slots_de_tempo.model.Reservation;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.UUID;
 
 public class ReservationFixture implements TemplateLoader {
@@ -18,8 +19,8 @@ public class ReservationFixture implements TemplateLoader {
             {
                 add("id", UUID.randomUUID());
                 add("professionalId", UUID.randomUUID());
-                add("startTime", LocalDateTime.now().plusDays(1));
-                add("endTime", LocalDateTime.now().plusDays(1).plusHours(1));
+                add("startTime", LocalTime.now().plusHours(1));
+                add("endTime", LocalTime.now().plusHours(1));
             }
         });
     }
