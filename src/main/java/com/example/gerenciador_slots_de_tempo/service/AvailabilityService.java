@@ -5,6 +5,7 @@ import com.example.gerenciador_slots_de_tempo.repository.AvailabilityRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -30,6 +31,10 @@ public class AvailabilityService {
 
     public Availability createAvailability(Availability availability) {
         return availabilityRepository.save(availability);
+    }
+
+    public Optional<Availability> findById(UUID id) {
+        return availabilityRepository.findById(id);
     }
 
     public Availability updateAvailability(UUID id, Availability availabilityDetails) {

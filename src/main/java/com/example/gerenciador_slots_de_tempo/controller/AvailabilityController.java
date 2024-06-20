@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -37,12 +38,10 @@ public class AvailabilityController {
             notes = "Retorna uma disponibilidade específica por ID")
     @GetMapping("/{id}")
     public ResponseEntity<AvailabilityDTO> getAvailabilityById(@PathVariable UUID id) {
-        Availability availability = availabilityService.getAvailabilityById(id);
-        if (availability != null) {
-            AvailabilityDTO userDTO = convertToDTO(availability);
-            return ResponseEntity.ok(userDTO);
-        }
-        return ResponseEntity.notFound().build();
+        Optional<Availability> optionalAvailability = availabilityService.findById(id);
+
+        return optionalAvailability.map(availability -> ResponseEntity.ok(convertToDTO(availability)))
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @ApiOperation(value = "Criar uma nova disponibilidade",
@@ -51,9 +50,9 @@ public class AvailabilityController {
     public ResponseEntity<AvailabilityDTO> createAvailability(@RequestBody AvailabilityDTO availabilityDTO) {
         Availability availability = convertToEntity(availabilityDTO);
         availability = availabilityService.save(availability);
-        AvailabilityDTO newAvailabilityDTO = convertToDTO(availability);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(newAvailabilityDTO);
+        availabilityDTO.setId(availability.getId());
+        return ResponseEntity.status(HttpStatus.CREATED).body(availabilityDTO);
     }
 
     @ApiOperation(value = "Atualizar disponibilidade",
@@ -61,14 +60,21 @@ public class AvailabilityController {
     @PutMapping("/{id}")
     public ResponseEntity<AvailabilityDTO> updateAvailability(@PathVariable UUID id,
                                                               @RequestBody AvailabilityDTO availabilityDTO) {
-        Availability availabilityDetails = convertToEntity(availabilityDTO);
-        Availability updatedAvailability = availabilityService.updateAvailability(id, availabilityDetails);
+        AvailabilityDTO updatedAvailabilityDTO = null;
+        if (availabilityDTO != null) {
+            Availability availabilityDetails = convertToEntity(availabilityDTO);
 
-        if (updatedAvailability != null) {
-            AvailabilityDTO updatedAvailabilityDTO = convertToDTO(updatedAvailability);
-            return ResponseEntity.ok(updatedAvailabilityDTO);
+            Availability updatedAvailability = availabilityService.updateAvailability(id, availabilityDetails);
+
+            if (updatedAvailability != null) {
+                updatedAvailabilityDTO = convertToDTO(updatedAvailability);
+            }
         }
-        return ResponseEntity.notFound().build();
+        if (updatedAvailabilityDTO != null) {
+            return ResponseEntity.ok(updatedAvailabilityDTO);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @ApiOperation(value = "Excluir disponibilidade",
@@ -80,20 +86,21 @@ public class AvailabilityController {
     }
 
     private AvailabilityDTO convertToDTO(Availability entity) {
-        AvailabilityDTO dto = new AvailabilityDTO();
-        dto.setProfessionalId(entity.getProfessionalId());
-        dto.setDayOfWeek(entity.getDayOfWeek());
-        dto.setStartTime(entity.getStartTime());
-        dto.setEndTime(entity.getEndTime());
-        return dto;
+        return AvailabilityDTO.builder()
+                .id(entity.getId())
+                .professionalId(entity.getProfessionalId())
+                .dayOfWeek(entity.getDayOfWeek())
+                .startTime(entity.getStartTime())
+                .endTime(entity.getEndTime())
+                .build();
     }
 
     private Availability convertToEntity(AvailabilityDTO dto) {
-        Availability entity = new Availability();
-        entity.setProfessionalId(dto.getProfessionalId());
-        entity.setDayOfWeek(dto.getDayOfWeek());
-        entity.setStartTime(dto.getStartTime());
-        entity.setEndTime(dto.getEndTime());
-        return entity;
+        return Availability.builder()
+                .professionalId(dto.getProfessionalId())
+                .dayOfWeek(dto.getDayOfWeek())
+                .startTime(dto.getStartTime())
+                .endTime(dto.getEndTime())
+                .build();
     }
 }

@@ -95,7 +95,7 @@ curl -X GET "http://localhost:8080/api/availabilities/{availabilityId}" -H "acce
 - Atualizar informações de disponibilidade (substitua {availabilityId} pelo ID obtido na criação):
 
 ```bash
-curl -X PUT "http://localhost:8080/api/availabilities/{availabilityId}" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"professionalId\": 1, \"dayOfWeek\": \"TUESDAY\", \"startTime\": \"09:00:00\", \"endTime\": \"11:00:00\"}"
+curl -X PUT "http://localhost:8080/api/availabilities/{availabilityId}" -H "Content-Type: application/json" -d '{ "professionalId": "827c10f9-412f-4203-8d1b-49a7187cc7b9", "dayOfWeek": "MONDAY", "startTime": "09:00:00", "endTime": "11:00:00"}'
 ```
 
 - Deletar um horário de disponibilidade (substitua {availabilityId} pelo ID obtido na criação):
@@ -107,7 +107,7 @@ curl -X DELETE "http://localhost:8080/api/availabilities/{availabilityId}" -H "a
 - Reservar um horário para um cliente 
 
 ```bash
-curl -X POST "http://localhost:8080/api/reservations" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"professionalId\": 1, \"startTime\": \"2023-06-14T08:30:00\", \"endTime\": \"2023-06-14T09:30:00\"}"
+curl -X POST "http://localhost:8080/api/reservations" -H "accept: */*" -H "Content-Type: application/json" -d "{ "professionalId": "827c10f9-412f-4203-8d1b-49a7187cc7b9", "startTime": "08:30:00", "endTime": "09:30:00"}"
 ```
 
 - Obter todas as reservas:

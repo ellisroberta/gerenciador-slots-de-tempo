@@ -22,6 +22,7 @@ import java.util.UUID;
 @JsonInclude
 public class AvailabilityDTO {
 
+    private UUID id;
     private UUID professionalId;
     private DayOfWeek dayOfWeek;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")

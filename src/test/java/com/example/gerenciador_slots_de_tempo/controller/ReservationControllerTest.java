@@ -2,6 +2,8 @@ package com.example.gerenciador_slots_de_tempo.controller;
 
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
+import com.example.gerenciador_slots_de_tempo.controller.ReservationController;
+import com.example.gerenciador_slots_de_tempo.dto.ReservationDTO;
 import com.example.gerenciador_slots_de_tempo.fixture.BaseFixture;
 import com.example.gerenciador_slots_de_tempo.fixture.model.ReservationFixture;
 import com.example.gerenciador_slots_de_tempo.model.Reservation;
@@ -35,6 +37,8 @@ class ReservationControllerTest {
 
     private Reservation reservation;
 
+    private ReservationDTO reservationDTO;
+
     @BeforeAll
     public static void setUpFixture() {
         FixtureFactoryLoader.loadTemplates(BaseFixture.ALL.getPacote());
@@ -43,14 +47,21 @@ class ReservationControllerTest {
     @BeforeEach
     public void setUp() {
         reservation = Fixture.from(Reservation.class).gimme(ReservationFixture.VALIDO);
+
+        reservationDTO = ReservationDTO.builder()
+                .professionalId(reservation.getProfessionalId())
+                .startTime(reservation.getStartTime())
+                .endTime(reservation.getEndTime())
+                .build();
     }
 
     @Test
     @DisplayName("Deve obter todas as reservas com sucesso")
     void testGetAllReservations_Success() {
-        when(reservationService.getAllReservations()).thenReturn(Collections.singletonList(reservation));
+        List<Reservation> reservations = Collections.singletonList(reservation);
+        when(reservationService.getAllReservations()).thenReturn(reservations);
 
-        List<Reservation> result = reservationController.getAllReservations();
+        List<ReservationDTO> result = reservationController.getAllReservations();
 
         assertEquals(1, result.size());
         verify(reservationService, times(1)).getAllReservations();
@@ -61,9 +72,14 @@ class ReservationControllerTest {
     void testCreateReservation_Success() {
         when(reservationService.createReservation(any(Reservation.class))).thenReturn(reservation);
 
-        ResponseEntity<Reservation> result = reservationController.createReservation(reservation);
+        ResponseEntity<ReservationDTO> result = reservationController.createReservation(reservationDTO);
 
         assertEquals(HttpStatus.CREATED, result.getStatusCode());
+
+        assertEquals(reservationDTO.getProfessionalId(), result.getBody().getProfessionalId());
+        assertEquals(reservationDTO.getStartTime(), result.getBody().getStartTime());
+        assertEquals(reservationDTO.getEndTime(), result.getBody().getEndTime());
+
         verify(reservationService, times(1)).createReservation(any(Reservation.class));
     }
 
@@ -72,7 +88,7 @@ class ReservationControllerTest {
     void testCreateReservation_Conflict() {
         when(reservationService.createReservation(any(Reservation.class))).thenThrow(new RuntimeException());
 
-        ResponseEntity<Reservation> result = reservationController.createReservation(reservation);
+        ResponseEntity<ReservationDTO> result = reservationController.createReservation(reservationDTO);
 
         assertEquals(HttpStatus.CONFLICT, result.getStatusCode());
         verify(reservationService, times(1)).createReservation(any(Reservation.class));
