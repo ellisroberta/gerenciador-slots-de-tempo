@@ -1,8 +1,8 @@
 # Gerenciador de Slots de Tempo
-O Gerenciador de Slots de Tempo é uma aplicação responsável por gerenciar a disponibilidade dos profissionais para agendamentos
+O Gerenciador de Slots de Tempo é uma aplicação responsável por gerenciar a disponibilidade dos profissionais para agendamentos.
 
 ## Descrição
-O Gerenciador de Slots de Tempo é um componente central que oferece funcionalidades para definir, listar e reservar horários de disponibilidade dos profissionais.
+O Gerenciador de Slots de Tempo é um componente central que oferece funcionalidades para definir, listar e reservar horários de disponibilidade dos profissionais. Ele ajuda a organizar e otimizar a agenda dos profissionais, facilitando o processo de marcação de compromissos.
 
 ## Arquitetura
 O serviço é projetado como um microserviço independente e segue os princípios de arquitetura de microsserviços.
@@ -58,15 +58,16 @@ Este comando iniciará todos os serviços necessários definidos no arquivo dock
 Após iniciar a aplicação, você pode acessar os endpoints e a documentação Swagger. Certifique-se de que todos os serviços estão funcionando corretamente antes de prosseguir.
 
 ## Documentação do Swagger
-O Gerenciador de Slots de Tempo possui uma documentação do Swagger que descreve os endpoints disponíveis e fornece informações detalhadas sobre como consumir a API.
+O Gerenciador de Slots de Tempo possui uma documentação do Swagger que descreve os endpoints disponíveis e fornece informações detalhadas sobre como consumir a API. Swagger é uma ferramenta útil para visualizar e interagir com a API sem a necessidade de escrever código manualmente
 
 Para acessar a documentação do Swagger, siga as etapas abaixo:
 
-Verifique se o docker-compose foi corretamente executado.
-Abra o navegador e vá para a URL: http://localhost:8080/swagger-ui.html.
+1. Verifique se o docker-compose foi corretamente executado. 
+2. Abra o navegador e vá para a URL: http://localhost:8080/swagger-ui.html.
+
 Isso abrirá a interface do Swagger, onde você poderá explorar os endpoints, enviar solicitações e visualizar as respostas.
 
-Certifique-se de que o serviço esteja em execução para acessar a documentação do Swagger.
+* Certifique-se de que o serviço esteja em execução para acessar a documentação do Swagger.
 
 ## Funcionalidades Principais
 - Listar todos os horários de disponibilidade dos profissionais.
